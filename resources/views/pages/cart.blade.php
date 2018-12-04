@@ -76,7 +76,7 @@
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce">
-                            <form method="post" action="#">
+
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                     <tr>
@@ -84,7 +84,6 @@
                                         <th class="product-thumbnail">&nbsp;</th>
                                         <th class="product-name">Product</th>
                                         <th class="product-price">Price</th>
-                                        {{--<th class="product-quantity">Quantity</th>--}}
                                         <th class="product-subtotal">Total</th>
                                     </tr>
                                     </thead>
@@ -94,6 +93,7 @@
 
 
                                     @foreach (Cart::content() as $item)
+                                        <div class="cart-item">
                                     <tr class="cart_item">
                                         <td class="product-remove">
                                             <form action="{{route('cart.destroy', $item->rowId)}}" method="POST">
@@ -120,15 +120,28 @@
                                         <td class="product-subtotal">
                                             <span class="amount">{{$item->price}} $</span>
                                         </td>
-                                    </tr>
-                                    @endforeach
 
+                                    </tr>
+                                        </div>
+
+
+                                    @endforeach
+                                    @else
+                                        <div style="margin: 5px">
+                                        <h2 > No items in cart</h2>
+                                         <button type="submit" action="{{ route('shop') }}">Continue Shopping</button>
+                                        </div>
+                                        <div class="clear"></div>
+
+                                    @endif
                                     </tbody>
                                 </table>
-                            </form>
+
 
                             <div class="cart-collaterals">
-
+                                <div>
+                                   <a href="{{route('checkout')}}"> <button type="submit" class="submit">Proceed to checkout</button></a>
+                                </div>
                                 <div class="cart_totals ">
                                     <h2>Cart Totals</h2>
 
@@ -150,13 +163,10 @@
                                         </tr>
                                         </tbody>
                                     </table>
+
                                 </div>
-                                @else
-
-                                    <h2> No items in cart</h2>
-
-                                @endif
                             </div>
+
                         </div>
                     </div>
                 </div>

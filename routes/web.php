@@ -26,7 +26,7 @@ Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy')
 Route::patch('/cart/{product}', 'CartController@update')->name('cart.update');
 
 Route::get('/checkout', 'CheckoutController@index')->name('checkout');
-
+Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 
 
 
@@ -48,3 +48,5 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
