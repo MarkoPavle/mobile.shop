@@ -56,7 +56,8 @@
                         <div class="woocommerce">
                             <div id="customer_details" class="col2-set">
                                 <div class="col-1">
-                                <div action="{{ route('checkout.store') }}" method="POST" id="payment-form">
+
+                                <form action="{{ route('checkout.store') }}" method="POST" id="payment-form">
                                     {{ csrf_field() }}
                                     <h2 class="sidebar-title">Billing Details</h2>
 
@@ -118,9 +119,9 @@
                                     <div class="spacer"></div>
 
                                     <button type="submit" id="complete-order" class="button-primary full-width">Complete Order</button>
-                                </div>
-                                </div>
                                 </form>
+                                </div>
+
                                     <div class="col-2">
                                         <h2 class="sidebar-title"> Your order</h2>
                                         @foreach(Cart::content() as $item)
@@ -299,6 +300,9 @@
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
 
+                // Disable the submit button to prevent repeated clicks
+                document.getElementById('complete-order').disabled = true;
+
                 var options = {
                     name: document.getElementById('name_on_card').value,
                     address_line1: document.getElementById('address').value,
@@ -312,6 +316,9 @@
                         // Inform the user if there was an error.
                         var errorElement = document.getElementById('card-errors');
                         errorElement.textContent = result.error.message;
+
+                        // Enable the submit button
+                        document.getElementById('complete-order').disabled = false;
                     } else {
                         // Send the token to your server.
                         stripeTokenHandler(result.token);
