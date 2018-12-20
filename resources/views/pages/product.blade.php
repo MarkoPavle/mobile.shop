@@ -29,15 +29,30 @@
 
 
 
-                    <div class="single-sidebar">
+                    {{--<div class="single-sidebar">
                         <h2 class="sidebar-title">Recent Posts</h2>
                         <ul>
+                            @foreach($mightAlsoLike as $item)
+                            <li><a href="{{route('shop.show',$item->id)}}">{{$item->name}}</a></li>
                             <li><a href="">Sony Smart TV - 2015</a></li>
                             <li><a href="">Sony Smart TV - 2015</a></li>
                             <li><a href="">Sony Smart TV - 2015</a></li>
                             <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
+                                @endforeach
                         </ul>
+                    </div>--}}
+                    <div class="single-sidebar">
+                        <h2 class="sidebar-title">Similar Products</h2>
+                        @foreach($mightAlsoLike as $item)
+                        <div class="thubmnail-recent">
+                            <img src="{{asset('storage/'.$item->image.'')}}" class="recent-thumb" alt="">
+                            <h2><a href="{{route('shop.show',$item->id)}}">{{$item->brand}} {{$item->name}}</a></h2>
+                            <div class="product-sidebar-price">
+                                <ins>{{$item->price}} €</ins>
+                            </div>
+                        </div>
+                        @endforeach
+
                     </div>
                 </div>
 
@@ -68,7 +83,7 @@
                                 <div class="product-inner">
                                     <h2 class="product-name">{{$product->name}}</h2>
                                     <div class="product-inner-price">
-                                        <ins>{{$product->price}}$</ins>
+                                        <ins>{{$product->price}} €</ins>
 
                                         <ins></ins>
                                     </div>
@@ -84,6 +99,8 @@
                                         <button class="add_to_cart_button" type="submit">Add to cart</button>
                                     </form>
 
+                                    <a href="{{ url('compare/'. $product->id) }}" class="add_to_cart_button">Compare</a>
+
                                     <div class="product-inner-category">
                                         <p>Brand: <a href="">{{$product->brand}}</a> </p>
                                     </div>
@@ -91,14 +108,13 @@
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
                                             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                                 <h2>Product Specifications</h2>
                                                 <p>{{$product->specifications}}</p>
                                             </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="profile">
+                                            {{--<div role="tabpanel" class="tab-pane fade" id="profile">
                                                 <h2>Reviews</h2>
                                                 <div class="submit-review">
                                                     <p><label for="name">Name</label> <input name="name" type="text"></p>
@@ -117,7 +133,7 @@
                                                     <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
                                                     <p><input type="submit" value="Submit"></p>
                                                 </div>
-                                            </div>
+                                            </div>--}}
                                         </div>
                                     </div>
 

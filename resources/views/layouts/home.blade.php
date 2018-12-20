@@ -46,9 +46,9 @@
 
 @yield('slider')
 
-@yield('promo')
-
 @yield('content')
+
+@yield('promo')
 
 @yield('brands')
 

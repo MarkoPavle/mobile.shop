@@ -13,20 +13,27 @@
 |
 */
 
+
 Route::get('/', 'PagesController@index')->name('homepage');
 
 Route::get('/shop', 'MobileController@index')->name('shop');
 
 Route::get('/shop/{product}', 'MobileController@show')->name('shop.show');
 
-
+//Cart
 Route::get('/cart', 'CartController@index')->name('cart');
 Route::post('/cart', 'CartController@store')->name('cart.store');
 Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
 Route::patch('/cart/{product}', 'CartController@update')->name('cart.update');
 
+//Checkout with stripe and paypall
 Route::get('/checkout', 'CheckoutController@index')->name('checkout');
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
+Route::post('/paypal-checkout', 'CheckoutController@paypalCheckout')->name('checkout.paypal');
+
+// Product comparing
+Route::get('compare/{id}', 'CompareController@compare');
+Route::get('comparing', 'CompareController@comparing')->name('comparing');
 
 
 

@@ -6,6 +6,16 @@
         <div class="block-slider block-slider4">
             <ul class="" id="bxslider-home4">
                 <li>
+                    <img src="img/auroraa.jpg" alt="Slide">
+                    <div class="caption-group">
+                        <h2 class="caption title">
+                            iPhone <span class="primary">6 <strong>Plus</strong></span>
+                        </h2>
+                        <h4 class="caption subtitle">Dual SIM</h4>
+                        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                    </div>
+                </li>
+                <li>
                     <img src="img/h4-slide.png" alt="Slide">
                     <div class="caption-group">
                         <h2 class="caption title">
@@ -91,95 +101,24 @@
                     <div class="latest-product">
                         <h2 class="section-title">Latest Products</h2>
                         <div class="product-carousel">
+                            @foreach($mobiles as $mobile)
                             <div class="single-product">
                                 <div class="product-f-image">
-                                    <img src="img/product-1.jpg" alt="">
+                                    <img style="width: 80%;height: 80%" src="{{asset('storage/'.$mobile->image.'')}}">
                                     <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        {{--<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>--}}
+                                        <a href="{{route('shop.show',$mobile->id)}}" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                     </div>
                                 </div>
 
-                                <h2><a href="single-product.html">Samsung Galaxy s5- 2015</a></h2>
+                                <h2><a href="{{route('shop.show',$mobile->id)}}">{{$mobile->brand}} {{$mobile->name}}</a></h2>
 
                                 <div class="product-carousel-price">
-                                    <ins>$700.00</ins> <del>$100.00</del>
+                                    <ins>€{{$mobile->price}}</ins>
                                 </div>
                             </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="img/product-2.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
+                            @endforeach
 
-                                <h2>Nokia Lumia 1320</h2>
-                                <div class="product-carousel-price">
-                                    <ins>$899.00</ins> <del>$999.00</del>
-                                </div>
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="img/product-3.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-
-                                <h2>LG Leon 2015</h2>
-
-                                <div class="product-carousel-price">
-                                    <ins>$400.00</ins> <del>$425.00</del>
-                                </div>
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="img/product-4.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-
-                                <h2><a href="single-product.html">Sony microsoft</a></h2>
-
-                                <div class="product-carousel-price">
-                                    <ins>$200.00</ins> <del>$225.00</del>
-                                </div>
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="img/product-5.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-
-                                <h2>iPhone 6</h2>
-
-                                <div class="product-carousel-price">
-                                    <ins>$1200.00</ins> <del>$1355.00</del>
-                                </div>
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="img/product-6.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-
-                                <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
-
-                                <div class="product-carousel-price">
-                                    <ins>$400.00</ins>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -195,14 +134,14 @@
                 <div class="col-md-12">
                     <div class="brand-wrapper">
                         <div class="brand-list">
-                            <img src="img/brand1.png" alt="">
-                            <img src="img/brand2.png" alt="">
-                            <img src="img/brand3.png" alt="">
-                            <img src="img/brand4.png" alt="">
-                            <img src="img/brand5.png" alt="">
-                            <img src="img/brand6.png" alt="">
-                            <img src="img/brand1.png" alt="">
-                            <img src="img/brand2.png" alt="">
+                            <img src="{{asset('img/brand1.png')}}" alt="">
+                            <img src="{{asset('img/brand2.png')}}" alt="">
+                            <img src="{{asset('img/brand3.png')}}" alt="">
+                            <img src="{{asset('img/brand4.png')}}" alt="">
+                            <img src="{{asset('img/brand5.png')}}" alt="">
+                            <img src="{{asset('img/brand6.png')}}" alt="">
+                            <img src="{{asset('img/brand7.png')}}" alt="">
+                            <img src="{{asset('img/brand8.png')}}" alt="">
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 
 @section('extra-css')
         <script src="https://js.stripe.com/v3"></script>
+        <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
     @endsection
 
 @section('content')
@@ -120,6 +121,23 @@
 
                                     <button type="submit" id="complete-order" class="button-primary full-width">Complete Order</button>
                                 </form>
+
+                                    <div >or</div>
+                                    <div >
+                                        <h2>Pay with PayPal</h2>
+                                        <form method="post" id="paypal-payment-form" action="{{route('checkout.paypal')}}">
+                                            {{csrf_field()}}
+                                            <section>
+                                                <div class="bt-drop-in-wrapper">
+                                                    <div id="bt-dropin"></div>
+                                                </div>
+                                            </section>
+                                            <input id="nonce" name="payment_method_nonce" type="hidden" />
+                                            <button class="button-primary" type="submit"><span>Pay with PayPal</span></button>
+                                        </form>
+                                    </div>
+
+
                                 </div>
 
                                     <div class="col-2">
@@ -130,7 +148,7 @@
                                                 <img src="{{asset('storage/'.$item->model->image.'')}}" class="recent-thumb" alt="">
                                                 <h2><a href="{{route('shop.show',$item->id)}}">{{$item->model->brand}} {{$item->name}}</a></h2>
                                                 <div class="product-sidebar-price">
-                                                    <ins><span class="amount">{{$item->price}} $</span></ins>
+                                                    <ins><span class="amount">{{$item->price}} €</span></ins>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -160,7 +178,7 @@
 
                                                 <tr class="order-total">
                                                     <th>Order Total</th>
-                                                    <td><strong><span class="amount">{{Cart::total()}} $</span></strong> </td>
+                                                    <td><strong><span class="amount">{{Cart::total()}} €</span></strong> </td>
                                                 </tr>
 
                                                 </tfoot>
@@ -170,70 +188,6 @@
                                     </div>
 
                                 </div>
-
-                                {{--<h3 id="order_review_heading">Your order</h3>
-
-                                <div id="order_review" style="position: relative;">
-                                    <table class="shop_table">
-                                        <thead>
-                                        <tr>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-total">Total</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr class="cart_item">
-                                            <td class="product-name">
-                                                Ship Your Idea <strong class="product-quantity">× 1</strong> </td>
-                                            <td class="product-total">
-                                                <span class="amount">£15.00</span> </td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-
-                                        <tr class="cart-subtotal">
-                                            <th>Cart Subtotal</th>
-                                            <td><span class="amount">£15.00</span>
-                                            </td>
-                                        </tr>
-
-                                        <tr class="shipping">
-                                            <th>Shipping and Handling</th>
-                                            <td>
-
-                                                Free Shipping
-                                                <input type="hidden" class="shipping_method" value="free_shipping" id="shipping_method_0" data-index="0" name="shipping_method[0]">
-                                            </td>
-                                        </tr>
-
-
-                                        <tr class="order-total">
-                                            <th>Order Total</th>
-                                            <td><strong><span class="amount">£15.00</span></strong> </td>
-                                        </tr>
-
-                                        </tfoot>
-                                    </table>
-
-
-                                    <div id="payment">
-                                        <ul class="payment_methods methods">
-
-                                            <li class="payment_method_bacs">
-                                                <input type="radio" data-order_button_text="" checked="checked" value="bacs" name="payment_method" class="input-radio" id="payment_method_bacs">
-                                                <label for="payment_method_bacs">Credit Card </label>
-                                            </li>
-
-                                            <li class="payment_method_paypal">
-                                                <input type="radio" data-order_button_text="Proceed to PayPal" value="paypal" name="payment_method" class="input-radio" id="payment_method_paypal">
-                                                <label for="payment_method_paypal">PayPal <img alt="PayPal Acceptance Mark" src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png"><a title="What is PayPal?" onclick="javascript:window.open('https://www.paypal.com/gb/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;" class="about_paypal" href="https://www.paypal.com/gb/webapps/mpp/paypal-popup">What is PayPal?</a>
-                                                </label>
-                                                <div style="display:none;" class="payment_box payment_method_paypal">
-                                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                                </div>
-                                            </li>
-                                        </ul>--}}
-
 
 
                                         <div class="clear"></div>
@@ -352,6 +306,50 @@
                 // Submit the form
                 form.submit();
             }
+
+            // PayPal Stuff
+            var form = document.querySelector('#paypal-payment-form');
+            var client_token = "{{ $paypalToken }}";
+
+            braintree.dropin.create({
+                authorization: client_token,
+                selector: '#bt-dropin',
+                paypal: {
+                    flow: 'vault'
+                }
+            }, function (createErr, instance) {
+                if (createErr) {
+                    console.log('Create Error', createErr);
+                    return;
+                }
+
+                // remove credit card option
+                var elem = document.querySelector('.braintree-option__card');
+                elem.parentNode.removeChild(elem);
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    instance.requestPaymentMethod(function (err, payload) {
+                        if (err) {
+                            console.log('Request Payment Method Error', err);
+                            return;
+                        }
+
+                        // Add the nonce to the form and submit
+                        document.querySelector('#nonce').value = payload.nonce;
+                        form.submit();
+                    });
+                });
+            });
+
         })();
+
+
+
     </script>
+
+
+
+
     @endsection

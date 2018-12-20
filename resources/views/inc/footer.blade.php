@@ -18,7 +18,9 @@
             <div class="col-md-3 col-sm-6">
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">User Navigation </h2>
+
                     <ul>
+
                         <li><a href="#">My account</a></li>
                         <li><a href="#">Order history</a></li>
                         <li><a href="#">Wishlist</a></li>

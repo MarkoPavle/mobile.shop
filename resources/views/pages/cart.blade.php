@@ -113,12 +113,12 @@
                                         </td>
 
                                         <td class="product-price">
-                                            <span class="amount">{{$item->price}} $</span>
+                                            <span class="amount">{{$item->price}} €</span>
                                         </td>
 
 
                                         <td class="product-subtotal">
-                                            <span class="amount">{{$item->price}} $</span>
+                                            <span class="amount">{{$item->price}} €</span>
                                         </td>
 
                                     </tr>

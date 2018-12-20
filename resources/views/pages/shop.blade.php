@@ -14,20 +14,41 @@
     </div>
 @endsection
 @section('content')
+
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
+                @include('inc.notifications')
+                <div class="single-sidebar" style="width: 150px ; height: 1000px  ; float: left">
+                    <h2 class="sidebar-title">Brands</h2>
+                    <ul>
+
+                       @foreach($unique as $brand)
+
+                            <li><a href="{{route('shop', ['$brand' => $brand->brand])}}">{{$brand->brand}}</a></li>
+
+                           @endforeach
+                    </ul>
+                </div>
+
+                <div style="float: right; margin-left: 50%">
+                    <strong>Price: </strong>
+                    <a href="{{ route('shop', ['category'=> request()->category, 'sort' => 'low_high']) }}">Low to High</a> |
+                    <a href="{{ route('shop', ['category'=> request()->category, 'sort' => 'high_low']) }}">High to Low</a>
+
+                </div>
+
                 @foreach($mobiles as $mobile)
                 <div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
                         <div class="product-upper">
-                            <img src="{{asset('storage/'.$mobile->image.'')}}">
+                            <a href="{{route('shop.show',$mobile->id)}}"><img src="{{asset('storage/'.$mobile->image.'')}}"></a>
 
                         </div>
-                        <h2><a href="{{route('shop.show',$mobile->id)}}">{{$mobile->name}}</a></h2>
+                        <h2><a href="{{route('shop.show',$mobile->id)}}">{{$mobile->brand}} {{$mobile->name}}</a></h2>
                         <div class="product-carousel-price">
-                            <ins>${{$mobile->price}}</ins>
+                            <ins>€{{$mobile->price}}</ins>
                         </div>
 
                         <div class="product-option-shop">
@@ -46,9 +67,12 @@
                     </div>
                 </div>
                 @endforeach
+                <div class="container" style="float: left; "> {{$mobiles->links()}}</div>
 
             </div>
 
         </div>
     </div>
     @endsection
+
+
