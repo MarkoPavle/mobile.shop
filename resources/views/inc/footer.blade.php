@@ -45,13 +45,13 @@
 
             <div class="col-md-3 col-sm-6">
                 <div class="footer-newsletter">
-                    <h2 class="footer-wid-title">Newsletter</h2>
-                    <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
+                    <h2 class="footer-wid-title">Search</h2>
+                    <p>Search here for our products</p>
                     <div class="newsletter-form">
-                        <form action="#">
-                            <input type="email" placeholder="Type your email">
-                            <input type="submit" value="Subscribe">
-                        </form>
+                            <form action="{{route('search')}}" method="GET">
+                                <input type="text" name="query" id="query" value="{{request()->input('query')}}" placeholder="Search products...">
+                                <input style="margin-top: 10px" type="submit" value="Search">
+                            </form>
                     </div>
                 </div>
             </div>
@@ -64,13 +64,12 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
-                    <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">freshDesignweb.com</a></p>
+                    <p>&copy; 2018 uCommerce. All Rights Reserved.</p>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="footer-card-icon">
-                    <i class="fa fa-cc-discover"></i>
                     <i class="fa fa-cc-mastercard"></i>
                     <i class="fa fa-cc-paypal"></i>
                     <i class="fa fa-cc-visa"></i>

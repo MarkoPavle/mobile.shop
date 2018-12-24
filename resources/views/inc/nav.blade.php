@@ -13,8 +13,8 @@
                 <ul class="nav navbar-nav" style="margin-left: 30%;">
                     <li><a href="{{route('homepage')}}">Home</a></li>
                     <li><a href="{{route('shop')}}">Mobiles</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Brands</a></li>
+                    <li><a href="{{route('products')}}">Products</a></li>
+                    <li><a href="{{route('brands')}}">Brands</a></li>
                     <li><a href="#">News</a></li>
                     {{--<li><a href="#">Category</a></li>
                     <li><a href="#">Others</a></li>

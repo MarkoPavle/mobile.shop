@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row">
                 @include('inc.notifications')
-                <div class="col-md-4">
+                {{--<div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Search Products</h2>
                         <form action="">
@@ -50,9 +50,9 @@
                             <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>--}}
 
-                <div class="col-md-8">
+                <div class="col-md-8" style="margin-left: 20%">
                     <div class="product-content-right">
                         <div class="woocommerce">
                             <div id="customer_details" class="col2-set">

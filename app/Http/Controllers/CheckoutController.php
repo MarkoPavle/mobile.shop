@@ -78,11 +78,14 @@ class CheckoutController extends Controller
 
                 $transaction = $result->transaction;
 
+                Cart::instance('default')->destroy();
+
                 return redirect()->route('confirmation.index')->with('success', 'Thank you! Your payment has been successfully accepted!');
 
             } else {
                 return back()->with('error', 'Error , try again.');
             }
+
         }
 
 }

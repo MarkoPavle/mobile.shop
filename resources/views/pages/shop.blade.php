@@ -6,7 +6,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
+
                         <h2>Mobiles</h2>
+
                     </div>
                 </div>
             </div>
@@ -20,16 +22,27 @@
         <div class="container">
             <div class="row">
                 @include('inc.notifications')
-                <div class="single-sidebar" style="width: 150px ; height: 1000px  ; float: left">
+
+                <div class="single-sidebar" style="width: 200px ; height: 1000px  ; float: left">
+
+                    <div class="single-sidebar">
+                        <h2 class="sidebar-title">Search </h2>
+                        <form action="{{route('search')}}" method="GET">
+                            <input type="text" name="query" id="query" value="{{request()->input('query')}}" placeholder="Search products...">
+                            <input type="submit" value="Search">
+                        </form>
+                    </div>
+
                     <h2 class="sidebar-title">Brands</h2>
                     <ul>
 
                        @foreach($unique as $brand)
 
-                            <li><a href="{{route('shop', ['$brand' => $brand->brand])}}">{{$brand->brand}}</a></li>
+                            <li><a href="{{route('shop.brand', ['$brand' => $brand->brand])}}">{{$brand->brand}}</a></li>
 
                            @endforeach
                     </ul>
+
                 </div>
 
                 <div style="float: right; margin-left: 50%">
@@ -44,7 +57,6 @@
                     <div class="single-shop-product">
                         <div class="product-upper">
                             <a href="{{route('shop.show',$mobile->id)}}"><img src="{{asset('storage/'.$mobile->image.'')}}"></a>
-
                         </div>
                         <h2><a href="{{route('shop.show',$mobile->id)}}">{{$mobile->brand}} {{$mobile->name}}</a></h2>
                         <div class="product-carousel-price">
@@ -57,9 +69,6 @@
                                 <input type="hidden" name="id" value="{{$mobile->id}}">
                                 <input type="hidden" name="name" value="{{$mobile->name}}">
                                 <input type="hidden" name="price" value="{{$mobile->price}}">
-                                {{--<div class="quantity">
-                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                </div>--}}
                                 <button class="add_to_cart_button" type="submit">Add to cart</button>
                             </form>
                             
@@ -70,7 +79,6 @@
                 <div class="container" style="float: left; "> {{$mobiles->links()}}</div>
 
             </div>
-
         </div>
     </div>
     @endsection

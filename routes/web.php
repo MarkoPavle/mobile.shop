@@ -16,9 +16,21 @@
 
 Route::get('/', 'PagesController@index')->name('homepage');
 
+//Mobiles
 Route::get('/shop', 'MobileController@index')->name('shop');
 
+Route::get('shop/brand/{brand}', 'MobileController@showBrandProducts')->name('shop.brand');
+
 Route::get('/shop/{product}', 'MobileController@show')->name('shop.show');
+
+//Search
+
+Route::get('/search', 'MobileController@search')->name('search');
+
+//Products
+Route::get('/products', 'ProductController@index')->name('products');
+
+Route::get('/products/{product}', 'ProductController@show')->name('products.show');
 
 //Cart
 Route::get('/cart', 'CartController@index')->name('cart');
@@ -35,7 +47,8 @@ Route::post('/paypal-checkout', 'CheckoutController@paypalCheckout')->name('chec
 Route::get('compare/{id}', 'CompareController@compare');
 Route::get('comparing', 'CompareController@comparing')->name('comparing');
 
-
+//Brands
+Route::get('/brands', 'BrandController@index')->name('brands');
 
 Route::get('/empty', function (){
     Cart::destroy();

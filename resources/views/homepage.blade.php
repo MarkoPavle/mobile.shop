@@ -134,14 +134,14 @@
                 <div class="col-md-12">
                     <div class="brand-wrapper">
                         <div class="brand-list">
-                            <img src="{{asset('img/brand1.png')}}" alt="">
-                            <img src="{{asset('img/brand2.png')}}" alt="">
-                            <img src="{{asset('img/brand3.png')}}" alt="">
-                            <img src="{{asset('img/brand4.png')}}" alt="">
-                            <img src="{{asset('img/brand5.png')}}" alt="">
-                            <img src="{{asset('img/brand6.png')}}" alt="">
-                            <img src="{{asset('img/brand7.png')}}" alt="">
-                            <img src="{{asset('img/brand8.png')}}" alt="">
+                            <a href="http://localhost/mobile.shop/public/shop/brand/Nokia"><img src="{{asset('img/brand1.png')}}" alt="nokia"></a>
+                            <a href="http://localhost/mobile.shop/public/shop/brand/Huawei"><img src="{{asset('img/brand2.png')}}" alt=""></a>
+                            <a href="http://localhost/mobile.shop/public/shop/brand/Samsung"><img src="{{asset('img/brand3.png')}}" alt=""></a>
+                            <a href="http://localhost/mobile.shop/public/shop/brand/Apple"><img src="{{asset('img/brand4.png')}}" alt=""></a>
+                            <a href="http://localhost/mobile.shop/public/shop/brand/Xiaomi"><img src="{{asset('img/brand5.png')}}" alt=""></a>
+                            <a href="http://localhost/mobile.shop/public/shop/brand/LG"><img src="{{asset('img/brand6.png')}}" alt=""></a>
+                            <a href="http://localhost/mobile.shop/public/shop/brand/Vodafone"><img src="{{asset('img/brand7.png')}}" alt=""></a>
+                            <a href="http://localhost/mobile.shop/public/shop/brand/Sony"><img src="{{asset('img/brand8.png')}}" alt=""></a>
                         </div>
                     </div>
                 </div>

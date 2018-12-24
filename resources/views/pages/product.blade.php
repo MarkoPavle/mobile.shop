@@ -17,12 +17,13 @@
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
+            @include('inc.notifications')
             <div class="row">
                 <div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Search Products</h2>
-                        <form action="">
-                            <input type="text" placeholder="Search products...">
+                        <form action="{{route('search')}}" method="GET">
+                            <input type="text" name="query" id="query" value="{{request()->input('query')}}" placeholder="Search products...">
                             <input type="submit" value="Search">
                         </form>
                     </div>

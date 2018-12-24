@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Mobile;
 
 
 class CartController extends Controller
@@ -15,7 +16,10 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('pages.cart');
+
+        $mightAlsoLike = Mobile::mightAlsoLike()->get();
+
+        return view('pages.cart')->with('mightAlsoLike',$mightAlsoLike);
     }
 
     /**
